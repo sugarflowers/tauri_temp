@@ -14,7 +14,8 @@
 }
 ::-webkit-scrollbar-thumb {
 	border-radius: 3px;
-	background: #52b5b5;
+	background: #b5b5b5;
+    cursor: pointer;
 }
 
 
@@ -32,12 +33,52 @@ textarea {
     white-space: nowrap;
     overflow: scroll;
 
-    background: transparent;
-    color: #050505;
+    /*background: transparent;*/
+    background: #fefefe;
+    color: #030303;
 
     border: 0px solid transparent;
     outline: none;
 
+}
+
+#menu {
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 100vh;
+    box-sizing: border-box;
+    background: #e7e7e7;
+    left: 0;
+    top: 0;
+    overflow: scroll;
+    padding-top: 10px;
+}
+#menu .folder {
+    display: block;
+    margin-left: 1em;
+    cursor: pointer;
+}
+#menu p {
+    margin: 0;
+}
+#menu ul {
+    list-style: none;
+    padding-left: 0px;
+    margin: 0;
+}
+#menu li {
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+
+#content {
+    display: block;
+    position: absolute;
+    width: calc(100% - 200px);
+    left: 200px;
+    top: 0px;
 }
 
 /*
@@ -144,7 +185,7 @@ button {
 @media (prefers-color-scheme: dark) {
   body {
     color: #f6f6f6;
-    background-color: #2f2f3f;
+    background-color: #2f2f2f;
   }
 
   a:hover {
@@ -153,6 +194,7 @@ button {
 
   textarea {
     color: #e5e5e5;
+    background: #000;
   }
 
   button {
@@ -162,6 +204,8 @@ button {
   button:active {
     background-color: #0f0f0f69;
   }
+  #menu {
+    background: #303030;
 }
 
 

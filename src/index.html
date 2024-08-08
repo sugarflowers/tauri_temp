@@ -1,16 +1,38 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <!--meta name="viewport" content="width=device-width, initial-scale=1.0" /-->
-    <title>Tauri App</title>
-    <script type="module" src="/main.js" defer></script>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="styles.css" />
+        <!--meta name="viewport" content="width=device-width, initial-scale=1.0" /-->
+        <title>Tauri App</title>
+        <script type="module" src="/main.js" defer></script>
+    </head>
 
-  <body>
+    <body>
 
-    <textarea id="text" placeholder="enter text" spellcheck="false"></textarea>
+
+    <div id="menu">
+        <div class="folder"><p>folder</p>
+            <div class="folder"><p>folder2</p>
+            <ul>
+                <li>item 1</li>
+                <li>item 2</li>
+                <li>item 3</li>
+                <li>item 4</li>
+            </ul>
+            </div>
+            <ul>
+                <li>item 1</li>
+                <li>item 2</li>
+                <li>item 3</li>
+                <li>item 4</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="content">
+        <textarea id="text" placeholder="enter text" spellcheck="false"></textarea>
+    </div>
 
   </body>
 </html>
