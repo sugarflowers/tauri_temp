@@ -53,6 +53,7 @@ textarea {
     top: 0;
     overflow: scroll;
     padding-top: 10px;
+    padding-left: 10px;
 }
 #menu p {
     margin: 0;
@@ -92,7 +93,6 @@ textarea {
     background-size: contain;
     background-image: url("assets/arrow-bottom.svg");
     background-repeat: no-repeat;
-    padding-left: 1em;
 }
 #menu p.label.closed::before {
     content: "";
@@ -102,9 +102,7 @@ textarea {
     background-size: contain;
     background-image: url("assets/arrow-right.svg");
     background-repeat: no-repeat;
-    padding-left: 1em;
 }
-
 
 #content {
     display: block;
