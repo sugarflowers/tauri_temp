@@ -1,4 +1,4 @@
-const { invoke } = window.__TAURI__.tauri;
+//const { invoke } = window.__TAURI__.tauri;
 /*
 let greetInputEl;
 let greetMsgEl;
@@ -9,6 +9,11 @@ async function greet() {
   greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
 }
 */
+
+var splitter_mouse_state;
+var menuEl;
+var contentEl;
+var splitterEl;
 
 function folder_click(id) {
     console.log(id);
@@ -23,14 +28,14 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     */
 
-    var targets = document.getElementsByClassName("label")
+    /*
+     *  for Tree View
+     */
+    var targets = document.getElementsByClassName("label");
     for( var i=0; i< targets.length ; i ++ ){
-        //console.log(targets[i]);
         targets[i].addEventListener("click", (e) => {
-            //console.log(e.target.id);
             var target = document.getElementsByClassName(e.target.id)[0];
             var label = document.getElementById(e.target.id);
-            //console.log(target);
             if (target.classList.contains("opened")) {
                 target.classList.remove("opened");
                 target.classList.add("closed");
@@ -42,9 +47,45 @@ window.addEventListener("DOMContentLoaded", () => {
                 label.classList.remove("closed");
                 label.classList.add("opened");
             }
-            //console.log(target.classList.contains("closed"));
         });
     }
 
+
+    /*
+     *  splitter
+     */
+    splitter_mouse_state="";
+    menuEl = document.querySelector("#menu");
+    contentEl = document.querySelector("#content");
+    splitterEl = document.querySelector("#splitter");
+
+    splitterEl.addEventListener("mousedown", (e) => {
+        if ( splitter_mouse_state == "" ) {
+            splitter_mouse_state="mousedown";
+        }
+    });
+    document.addEventListener("mouseup", (e) => {
+        splitter_mouse_state = "";
+    });
+    document.addEventListener("mousemove", (e) => {
+        if (splitter_mouse_state == "mousedown" ) {
+            if ( e.x > 100 ){ 
+                menuEl.style.width = e.x + 'px';
+                contentEl.style.left = e.x + 'px';
+                contentEl.style.width = "calc(100% - " + e.x + 'px)';
+                splitterEl.style.left = e.x + 'px';
+            }
+        }
+    });
+
+    /*
+     *  disable context menu 
+     */
+    menuEl.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+    });
+    splitterEl.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+    });
 
 });
