@@ -15,8 +15,125 @@ var menuEl;
 var contentEl;
 var splitterEl;
 
-function folder_click(id) {
-    console.log(id);
+
+/*
+ * rust側から送り込み表示する。
+ */
+async function tree_view_setup(tree_data) {
+    var tree_data = {
+        "dir": {
+            "f0": {
+                "name": "Beverages!",
+                "parent": "root"
+            },
+
+            "f1": {
+                "name": "Tea",
+                "parent": "f0"
+            },
+
+            "f2": {
+                "name": "Green Tea",
+                "parent": "f1"
+            }
+        }, 
+
+        "doc": {
+            "d0": {
+                "name": "Water",
+                "parent": "f0"
+            },
+
+            "d1": {
+                "name": "Caffee",
+                "parent": "f0"
+            },
+
+            "d2": {
+                "name": "Black Tea",
+                "parent": "f1"
+            },
+
+            "d3": {
+                "name": "White Tea",
+                "parent": "f1"
+            },
+
+            "d4": {
+                "name": "Sencha",
+                "parent": "f2"
+            },
+
+            "d5": {
+                "name": "Gyokuro",
+                "parent": "f2"
+            },
+
+            "d6": {
+                "name": "Matcha",
+                "parent": "f2"
+            },
+
+            "d7": {
+                "name": "Pi Lo Chun",
+                "parent": "f2"
+            }
+        }
+
+    };
+
+    var data = tree_data["dir"];
+    var keys = Object.keys(data);
+    keys.forEach((key) => {
+        var name = data[key]["name"];
+        var parent = data[key]["parent"];
+        tree_view_create_folder(parent, key, name);
+    });
+
+    var data = tree_data["doc"];
+    var keys = Object.keys(data);
+    keys.forEach((key) => {
+        var name = data[key]["name"];
+        var parent = data[key]["parent"];
+        tree_view_create_doc(parent, key, name);
+    });
+}
+
+async function tree_view_create_doc(parent, id, name) {
+    let e1 = document.createElement("li");
+    e1.className = "docu";
+    e1.setAttribute("id", id);
+    e1.textContent = name;
+    document.querySelector("#" + parent).append(e1);
+}
+
+async function tree_view_create_folder(parent, id, name) {
+    let e1 = document.createElement("li");
+    document.querySelector("#" + parent).append(e1);
+    let e2 = document.createElement("span");
+    e2.textContent = name;
+    e2.className = "caret";
+    e1.append(e2);
+    let e3 = document.createElement("ul");
+    e3.className = "nested";
+    e3.setAttribute("id", id);
+    e2.after(e3)
+}
+
+async function tree_view_update() {
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+    for (i = 0; i < toggler.length; i ++ ){
+        toggler[i].addEventListener("click", function() {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+}
+
+async function tree_view() {
+    await tree_view_setup();
+    await tree_view_update();
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -28,27 +145,9 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     */
 
-    /*
-     *  for Tree View
-     */
-    var targets = document.getElementsByClassName("label");
-    for( var i=0; i< targets.length ; i ++ ){
-        targets[i].addEventListener("click", (e) => {
-            var target = document.getElementsByClassName(e.target.id)[0];
-            var label = document.getElementById(e.target.id);
-            if (target.classList.contains("opened")) {
-                target.classList.remove("opened");
-                target.classList.add("closed");
-                label.classList.remove("opened");
-                label.classList.add("closed");
-            } else {
-                target.classList.remove("closed");
-                target.classList.add("opened");
-                label.classList.remove("closed");
-                label.classList.add("opened");
-            }
-        });
-    }
+
+
+    tree_view();
 
 
     /*

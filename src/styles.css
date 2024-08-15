@@ -58,47 +58,23 @@ textarea {
     padding-top: 10px;
     padding-left: 10px;
     user-select: none;
+
 }
-#menu p {
+
+#menu #root, #menu ul {
+    list-style-type: none;
     margin: 0;
-    display: block;
+    padding: 0;
 }
-#menu ul {
-    list-style: none;
+
+#menu #root li {
     padding-left: 1em;
-    margin: 0;
 }
-#menu li::before {
-    content: "";
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-    background-size: contain;
-    background-image: url("assets/doc.svg");
-    background-repeat: no-repeat;
-    margin: 0 0em -0.25em -1em;
-}
-#menu .folder {
-    display: block;
-    margin-left: 1em;
+#menu .caret {
     cursor: pointer;
 }
-#menu .folder.closed {
-    display: none;
-}
-#menu p, #menu li {
-    cursor: pointer;
-}
-#menu p.label.opened::before {
-    content: "";
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-    background-size: contain;
-    background-image: url("assets/arrow-bottom.svg");
-    background-repeat: no-repeat;
-}
-#menu p.label.closed::before {
+
+#menu .caret::before {
     content: "";
     display: inline-block;
     height: 1em;
@@ -107,6 +83,28 @@ textarea {
     background-image: url("assets/arrow-right.svg");
     background-repeat: no-repeat;
 }
+#menu .caret-down::before {
+    background-image: url("assets/arrow-bottom.svg");
+}
+#menu li .docu::before {
+    content: "";
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    background-size: contain;
+    background-image: url("assets/doc.svg");
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0 0 -2em -2em;
+}
+
+.nested {
+    display: none;
+}
+.active {
+    display: block;
+}
+
 
 #content {
     touch-action: none;
